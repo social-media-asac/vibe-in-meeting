@@ -16,19 +16,21 @@ let favicon = require( 'serve-favicon' );
 ////// Imports      /////
 ////////////////////////
 
-// let stream = require( './ws/stream' );
+let stream = require( './socket/stream' );
 
 
 //////////////////////////
 ////// Middle Ware  /////
 ////////////////////////
 
-app.use( favicon( path.join( __dirname, 'favicon.ico' ) ) );
+app.use( favicon( path.join( __dirname, 'favicon-32x32.png' ) ) );
 
 app.use( express.static( 'public' ) );
 
 
-// io.of( '/stream' ).on( 'connection', stream );
+io.of( '/stream' ).on( 'connection', stream );
+
+
 
 
 
@@ -39,7 +41,7 @@ app.use( express.static( 'public' ) );
 module.exports = {
     server: app,
     startup: (port) => {
-      app.listen(port, () => {
+      server.listen(port, () => {
         console.log(`Server Up on ${port}`);
       });
     },
