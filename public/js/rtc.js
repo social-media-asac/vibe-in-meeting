@@ -36,7 +36,7 @@
          var screen = '';
          var recordedStream = [];
          var mediaRecorder = '';
-         let ahmad =[];
+      
          
  
          //Get user video by default
@@ -55,7 +55,8 @@
              socket.emit( 'subscribe', {
                  room: room,
                  socketId: socketId
-             } ,ahmad.push(room));
+             } , 
+             );
              
          
  
@@ -75,30 +76,31 @@
              socket.on( 'newUserStart', ( data ) => {
                  pc.push( data.sender );
                  init( false, data.sender );
-                //  console.log(data,'data')
-                //  console.log(socket.adapter,'daaaaaaaaaaaaaaaaaaaaaaa')
-                 socket.on('oldMessage',payload=>{
-                   console.log(ahmad,'******************///////////////////')
-                   let tasnim =payload.oldMessage[ahmad];
-                   if(payload.oldMessage[ahmad]){
-                       tasnim.forEach(elem=>{
-                       
-                          h.addChat(elem,'remote')
-                          
-                       })
-                       
-                       
-                    // console.log(payload.oldMessage[ahmad].split(),'666666')
+                 console.log('omar')
 
-                   }
-                  
-                //    let tasnim = payload.oldMessage[ahmad].split(' ');
-                //     console.log(tasnim,"payload");
-                    // h.addChat( payload.oldMessage[ahmad], 'local' );
-                   
-                 })
+                 
+              
               
              } );
+
+             socket.on('oldMessage',payload=>{
+                   
+                let tasnim =payload.oldMessage[room];
+       
+                  if(tasnim){
+                    tasnim.forEach(elem =>{
+                        h.addChat(elem,'remote')
+    
+                    })
+
+                  }
+              
+              
+                
+              
+                  
+                })
+
  
  
              socket.on( 'ice candidates', async ( data ) => {
@@ -144,6 +146,10 @@
                  console.log(data,'9999999999999999999999999999')
                
              } );
+             
+              
+              
+              
            
          } );
  
